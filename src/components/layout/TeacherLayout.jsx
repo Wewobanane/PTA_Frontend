@@ -9,6 +9,7 @@ import {
 import { useNavigate } from 'react-router-dom';
 import TopBar from '../Topbars/TeacherTopbar';
 import Sidebar from '../Sidebars/TeacherSidebar';
+import SearchDialog from '../shared/SearchDialog';
 
 const drawerWidth = 240;
 
@@ -16,6 +17,7 @@ function TeacherLayout({ children }) {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [darkMode, setDarkMode] = useState(localStorage.getItem('theme') === 'dark');
   const [searchQuery, setSearchQuery] = useState('');
+  const [searchDialogOpen, setSearchDialogOpen] = useState(false);
   const navigate = useNavigate();
 
   // Theme configuration
@@ -54,7 +56,7 @@ function TeacherLayout({ children }) {
   // Search handler
   const handleSearch = useCallback((query) => {
     if (!query.trim()) return;
-    console.log('Searching for:', query);
+    setSearchDialogOpen(true);
   }, []);
 
   const handleDrawerToggle = () => {
@@ -100,6 +102,13 @@ function TeacherLayout({ children }) {
         >
           {children}
         </Box>
+
+        <SearchDialog
+          open={searchDialogOpen}
+          onClose={() => setSearchDialogOpen(false)}
+          userRole="teacher"
+          initialQuery={searchQuery}
+        />
       </Box>
     </ThemeProvider>
   );

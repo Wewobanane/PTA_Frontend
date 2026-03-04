@@ -9,6 +9,7 @@ import {
 import { useNavigate } from 'react-router-dom';
 import TopBar from '../Topbars/ParentTopbar';
 import Sidebar from '../Sidebars/ParentSidebar';
+import SearchDialog from '../shared/SearchDialog';
 
 const drawerWidth = 240;
 
@@ -16,6 +17,7 @@ function ParentLayout({ children }) {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [darkMode, setDarkMode] = useState(localStorage.getItem('theme') === 'dark');
   const [searchQuery, setSearchQuery] = useState('');
+  const [searchDialogOpen, setSearchDialogOpen] = useState(false);
   const navigate = useNavigate();
 
   // Theme configuration
@@ -54,15 +56,8 @@ function ParentLayout({ children }) {
   // Search handler
   const handleSearch = useCallback((query) => {
     if (!query.trim()) return;
-    
-    // Navigate to a search results page or filter current view
-    console.log('Searching for:', query);
-    
-    // You can implement search navigation here
-    // For now, we'll just log it
-    // In the future, you could navigate to a search results page:
-    // navigate(`/parent/search?q=${encodeURIComponent(query)}`);
-  }, [navigate]);
+    setSearchDialogOpen(true);
+  }, []);
 
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
@@ -107,6 +102,13 @@ function ParentLayout({ children }) {
         >
           {children}
         </Box>
+
+        <SearchDialog
+          open={searchDialogOpen}
+          onClose={() => setSearchDialogOpen(false)}
+          userRole="parent"
+          initialQuery={searchQuery}
+        />
       </Box>
     </ThemeProvider>
   );

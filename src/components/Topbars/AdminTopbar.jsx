@@ -22,7 +22,7 @@ import {
   MarkEmailRead as MarkEmailReadIcon,
 } from '@mui/icons-material';
 import { styled } from '@mui/material/styles';
-import { messageAPI } from '../../config/api';
+import { messageAPI, announcementAPI } from '../../config/api';
 import { useNavigate } from 'react-router-dom';
 
 
@@ -83,25 +83,77 @@ function AdminTopbar({
   const fetchNotifications = async () => {
     try {
       setLoadingNotifications(true);
-      const [unreadRes, messagesRes] = await Promise.all([
+      const [unreadRes, messagesRes, announcementsRes, meetingsRes] = await Promise.all([
         messageAPI.getUnreadCount(),
-        messageAPI.getMessages('received')
+        messageAPI.getMessages('received'),
+        announcementAPI.getAnnouncements(),
+        announcementAPI.getMeetings(),
       ]);
       
-      setUnreadCount(unreadRes.data?.data?.count || 0);
+      const unreadMessagesCount = unreadRes.data?.data?.count || 0;
       
-      // Get recent messages (last 5)
-      const recentMessages = (messagesRes.data?.data || []).slice(0, 5).map(msg => ({
-        id: msg._id,
-        title: msg.subject || 'New message',
-        message: msg.message?.substring(0, 60) + '...',
-        from: msg.sender?.name || 'Unknown',
-        time: formatTimeAgo(msg.createdAt),
-        unread: !msg.isRead,
-        messageId: msg._id,
-      }));
+      // Get recent messages (unread only)
+      const recentMessages = (messagesRes.data?.data || [])
+        .filter(msg => !msg.isRead)
+        .slice(0, 5)
+        .map(msg => ({
+          id: msg._id,
+          type: 'message',
+          title: msg.subject || 'New message',
+          message: msg.message?.substring(0, 60) + '...',
+          from: msg.sender?.name || 'Unknown',
+          time: formatTimeAgo(msg.createdAt),
+          unread: true,
+          itemId: msg._id,
+        }));
       
-      setNotifications(recentMessages);
+      // Get recent announcements (last 7 days)
+      const sevenDaysAgo = new Date();
+      sevenDaysAgo.setDate(sevenDaysAgo.getDate() - 7);
+      
+      const recentAnnouncements = (announcementsRes.data?.data || [])
+        .filter(ann => new Date(ann.createdAt) > sevenDaysAgo && ann.isActive)
+        .slice(0, 5)
+        .map(ann => ({
+          id: ann._id,
+          type: 'announcement',
+          title: '📢 ' + ann.title,
+          message: ann.content?.substring(0, 60) + '...',
+          from: ann.author?.name || 'Admin',
+          time: formatTimeAgo(ann.createdAt),
+          unread: true,
+          itemId: ann._id,
+        }));
+      
+      // Get upcoming meetings (next 14 days)
+      const fourteenDaysLater = new Date();
+      fourteenDaysLater.setDate(fourteenDaysLater.getDate() + 14);
+      const now = new Date();
+      
+      const upcomingMeetings = (meetingsRes.data?.data || [])
+        .filter(meeting => {
+          const meetingDate = new Date(meeting.meetingDate);
+          return meetingDate >= now && meetingDate <= fourteenDaysLater && meeting.status === 'scheduled';
+        })
+        .slice(0, 5)
+        .map(meeting => ({
+          id: meeting._id,
+          type: 'meeting',
+          title: '📅 ' + meeting.title,
+          message: `${new Date(meeting.meetingDate).toLocaleDateString()} at ${meeting.startTime}`,
+          from: meeting.organizer?.name || 'Organizer',
+          time: formatTimeAgo(meeting.createdAt),
+          unread: true,
+          itemId: meeting._id,
+        }));
+      
+      // Combine all notifications and sort by date
+      const allNotifications = [...recentMessages, ...recentAnnouncements, ...upcomingMeetings]
+        .sort((a, b) => new Date(b.time) - new Date(a.time))
+        .slice(0, 10);
+      
+      setUnreadCount(unreadMessagesCount + recentAnnouncements.length + upcomingMeetings.length);
+      setNotifications(allNotifications);
     } catch (error) {
       console.error('Error fetching notifications:', error);
     } finally {
@@ -135,9 +187,13 @@ function AdminTopbar({
     return 'Just now';
   };
 
-  const handleNotificationClick = (notificationId) => {
+  const handleNotificationClick = (notification) => {
     setNotifAnchor(null);
-    navigate('/admin/messages');
+    if (notification.type === 'message') {
+      navigate('/admin/messages');
+    } else if (notification.type === 'announcement' || notification.type === 'meeting') {
+      navigate('/admin/announcements-meetings');
+    }
   };
 
   const handleMarkAllRead = async () => {
@@ -253,7 +309,7 @@ function AdminTopbar({
             notifications.map((notif) => (
               <MenuItem
                 key={notif.id}
-                onClick={() => handleNotificationClick(notif.messageId)}
+                onClick={() => handleNotificationClick(notif)}
                 sx={{ 
                   bgcolor: notif.unread ? 'action.hover' : 'transparent',
                   whiteSpace: 'normal',
@@ -295,7 +351,7 @@ function AdminTopbar({
             }}
           >
             <Typography variant="body2" color="primary" sx={{ fontWeight: 'bold' }}>
-              View all messages
+              View all
             </Typography>
           </MenuItem>
         </Menu>
