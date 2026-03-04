@@ -97,7 +97,7 @@ function ParentLayout({ children }) {
           sx={{
             flexGrow: 1,
             p: 0,
-            pt: '24px', // Padding top to account for AppBar height
+            pt: '64px', // Padding top to account for AppBar height
             overflowY: 'auto',
             overflowX: 'hidden',
             height: '100vh',

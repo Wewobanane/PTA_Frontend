@@ -37,14 +37,24 @@ const ProtectedRoute = ({
   }
 
   // Redirect to login if not authenticated
-  if (!isAuthenticated) {
-    return <Navigate to={redirectTo} state={{ from: location }} replace />;
+  if (!isAuthenticated || !user) {
+    // Prevent redirect loop when already on login page
+    if (location.pathname !== redirectTo) {
+      return <Navigate to={redirectTo} state={{ from: location }} replace />;
+    }
+    return null;
   }
 
   // Check role-based access if roles are specified
   if (allowedRoles.length > 0 && !hasAnyRole(user?.role, allowedRoles)) {
-    // Redirect to user's dashboard if they don't have required role
-    return <Navigate to={`/${user?.role}`} replace />;
+    const userDashboard = `/${user.role}`;
+    
+    // Prevent infinite loop: only redirect if not already on target path
+    if (location.pathname !== userDashboard && !location.pathname.startsWith(userDashboard + '/')) {
+      return <Navigate to={userDashboard} replace />;
+    }
+    // If already on the dashboard path but still unauthorized, allow it (shouldn't happen)
+    return null;
   }
 
   // User is authenticated and has required role

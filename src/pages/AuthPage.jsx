@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import {
   Box,
@@ -34,6 +34,7 @@ function AuthPage() {
   const navigate = useNavigate();
   const location = useLocation();
   const { login, isAuthenticated, user } = useAuth();
+  const hasRedirected = useRef(false);
 
   // Check for activation success message
   useEffect(() => {
@@ -46,7 +47,8 @@ function AuthPage() {
 
   // Redirect if already authenticated
   useEffect(() => {
-    if (isAuthenticated && user) {
+    if (isAuthenticated && user && !hasRedirected.current) {
+      hasRedirected.current = true;
       navigate(`/${user.role}`);
     }
   }, [isAuthenticated, user, navigate]);

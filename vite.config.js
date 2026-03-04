@@ -8,4 +8,7 @@ export default defineConfig({
   server: {
     port: 5174,
   },
+  optimizeDeps: {
+    include: ['@mui/material', '@mui/icons-material'],
+  },
 })
