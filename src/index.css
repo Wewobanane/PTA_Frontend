@@ -31,6 +31,34 @@ body {
   overflow: hidden;
 }
 
+/* Responsive container utilities */
+* {
+  box-sizing: border-box;
+}
+
+/* Ensure images and media are responsive */
+img,
+video,
+canvas,
+svg {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Responsive tables */
+table {
+  width: 100%;
+  overflow-x: auto;
+  display: block;
+}
+
+@media (min-width: 768px) {
+  table {
+    display: table;
+  }
+}
+
 h1 {
   font-size: 3.2em;
   line-height: 1.1;
