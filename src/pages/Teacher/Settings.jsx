@@ -85,61 +85,82 @@ export default function TeacherSettings() {
 
   return (
     <TeacherLayout>
-      <Box sx={{ pt: 3, pr: 3, pb: 3 }}>
+      <Box sx={{ pt: { xs: 1.5, sm: 2, md: 3 }, pr: { xs: 1.5, sm: 2, md: 3 }, pb: { xs: 1.5, sm: 2, md: 3 } }}>
         {/* Header */}
-        <Box sx={{ mb: 4 }}>
-          <Typography variant="h4" gutterBottom sx={{ fontWeight: 'bold' }}>
+        <Box sx={{ mb: { xs: 2, sm: 3, md: 4 } }}>
+          <Typography 
+            variant="h4" 
+            gutterBottom 
+            sx={{ 
+              fontWeight: 'bold',
+              fontSize: { xs: '1.5rem', sm: '1.75rem', md: '2.125rem' }
+            }}
+          >
             ⚙️ Settings
           </Typography>
-          <Typography variant="body1" color="text.secondary">
+          <Typography variant="body1" color="text.secondary" sx={{ fontSize: { xs: '0.875rem', sm: '1rem' } }}>
             Manage your account settings and preferences
           </Typography>
         </Box>
 
         {/* Success/Error Messages */}
         {successMessage && (
-          <Alert severity="success" sx={{ mb: 3 }}>
+          <Alert severity="success" sx={{ mb: { xs: 2, md: 3 }, fontSize: { xs: '0.8rem', sm: '0.875rem' } }}>
             {successMessage}
           </Alert>
         )}
         {errorMessage && (
-          <Alert severity="error" sx={{ mb: 3 }}>
+          <Alert severity="error" sx={{ mb: { xs: 2, md: 3 }, fontSize: { xs: '0.8rem', sm: '0.875rem' } }}>
             {errorMessage}
           </Alert>
         )}
 
-        <Grid container spacing={3}>
+        <Grid container spacing={{ xs: 2, md: 3 }}>
           {/* Profile Section */}
           <Grid size={{ xs: 12, md: 8 }}>
             <Card>
-              <CardContent>
-                <Box sx={{ display: 'flex', alignItems: 'center', mb: 3 }}>
-                  <AccountCircleIcon color="primary" sx={{ mr: 1 }} />
-                  <Typography variant="h6" sx={{ fontWeight: 'bold' }}>
+              <CardContent sx={{ p: { xs: 1.5, sm: 2, md: 3 } }}>
+                <Box sx={{ display: 'flex', alignItems: 'center', mb: { xs: 2, md: 3 } }}>
+                  <AccountCircleIcon color="primary" sx={{ mr: 1, fontSize: { xs: '1.25rem', sm: '1.5rem' } }} />
+                  <Typography variant="h6" sx={{ fontWeight: 'bold', fontSize: { xs: '1rem', sm: '1.125rem', md: '1.25rem' } }}>
                     Profile Information
                   </Typography>
                 </Box>
                 
-                <Box sx={{ display: 'flex', alignItems: 'center', mb: 3 }}>
-                  <Avatar sx={{ width: 80, height: 80, bgcolor: 'primary.main', mr: 3 }}>
-                    <Typography variant="h4">
+                <Box sx={{ 
+                  display: 'flex', 
+                  flexDirection: { xs: 'column', sm: 'row' },
+                  alignItems: { xs: 'center', sm: 'center' },
+                  textAlign: { xs: 'center', sm: 'left' },
+                  mb: { xs: 2, md: 3 } 
+                }}>
+                  <Avatar sx={{ 
+                    width: { xs: 64, sm: 72, md: 80 }, 
+                    height: { xs: 64, sm: 72, md: 80 }, 
+                    bgcolor: 'primary.main', 
+                    mr: { xs: 0, sm: 3 },
+                    mb: { xs: 1.5, sm: 0 }
+                  }}>
+                    <Typography variant="h4" sx={{ fontSize: { xs: '1.75rem', sm: '2rem', md: '2.125rem' } }}>
                       {profileData?.name?.charAt(0) || user?.name?.charAt(0) || 'T'}
                     </Typography>
                   </Avatar>
                   <Box>
-                    <Typography variant="h6">{profileData?.name || user?.name || 'Teacher'}</Typography>
-                    <Typography variant="body2" color="text.secondary">
+                    <Typography variant="h6" sx={{ fontSize: { xs: '1rem', sm: '1.125rem', md: '1.25rem' } }}>
+                      {profileData?.name || user?.name || 'Teacher'}
+                    </Typography>
+                    <Typography variant="body2" color="text.secondary" sx={{ fontSize: { xs: '0.8rem', sm: '0.875rem' } }}>
                       {profileData?.email || user?.email}
                     </Typography>
-                    <Typography variant="caption" color="text.secondary">
+                    <Typography variant="caption" color="text.secondary" sx={{ fontSize: { xs: '0.7rem', sm: '0.75rem' } }}>
                       Role: {user?.role?.toUpperCase() || 'TEACHER'}
                     </Typography>
                   </Box>
                 </Box>
 
-                <Divider sx={{ mb: 3 }} />
+                <Divider sx={{ mb: { xs: 2, md: 3 } }} />
 
-                <Grid container spacing={2}>
+                <Grid container spacing={{ xs: 1.5, sm: 2 }}>
                   <Grid size={{ xs: 12 }}>
                     <TextField
                       label="Full Name"
@@ -179,20 +200,28 @@ export default function TeacherSettings() {
                     />
                   </Grid>
                   <Grid size={{ xs: 12 }}>
-                    <Box sx={{ display: 'flex', gap: 2 }}>
+                    <Box sx={{ 
+                      display: 'flex', 
+                      flexDirection: { xs: 'column', sm: 'row' },
+                      gap: { xs: 1.5, sm: 2 } 
+                    }}>
                       <Button
                         variant="contained"
-                        startIcon={<SaveIcon />}
+                        startIcon={<SaveIcon sx={{ fontSize: { xs: '1rem', sm: '1.25rem' } }} />}
                         onClick={handleProfileUpdate}
                         disabled={profileLoading}
+                        fullWidth={window.innerWidth < 600}
+                        sx={{ fontSize: { xs: '0.875rem', sm: '0.9375rem' } }}
                       >
                         Save Changes
                       </Button>
                       <Button
                         variant="outlined"
                         color="error"
-                        startIcon={<LogoutIcon />}
+                        startIcon={<LogoutIcon sx={{ fontSize: { xs: '1rem', sm: '1.25rem' } }} />}
                         onClick={logout}
+                        fullWidth={window.innerWidth < 600}
+                        sx={{ fontSize: { xs: '0.875rem', sm: '0.9375rem' } }}
                       >
                         Logout
                       </Button>
@@ -204,21 +233,22 @@ export default function TeacherSettings() {
 
             {/* Classes Section */}
             {profileData.classesTeaching && profileData.classesTeaching.length > 0 && (
-              <Card sx={{ mt: 3 }}>
-                <CardContent>
-                  <Box sx={{ display: 'flex', alignItems: 'center', mb: 3 }}>
-                    <ClassIcon color="primary" sx={{ mr: 1 }} />
-                    <Typography variant="h6" sx={{ fontWeight: 'bold' }}>
+              <Card sx={{ mt: { xs: 2, md: 3 } }}>
+                <CardContent sx={{ p: { xs: 1.5, sm: 2, md: 3 } }}>
+                  <Box sx={{ display: 'flex', alignItems: 'center', mb: { xs: 2, md: 3 } }}>
+                    <ClassIcon color="primary" sx={{ mr: 1, fontSize: { xs: '1.25rem', sm: '1.5rem' } }} />
+                    <Typography variant="h6" sx={{ fontWeight: 'bold', fontSize: { xs: '1rem', sm: '1.125rem', md: '1.25rem' } }}>
                       My Classes
                     </Typography>
                   </Box>
-                  <Box sx={{ display: 'flex', gap: 1, flexWrap: 'wrap' }}>
+                  <Box sx={{ display: 'flex', gap: { xs: 0.75, sm: 1 }, flexWrap: 'wrap' }}>
                     {profileData.classesTeaching.map((className, index) => (
                       <Chip
                         key={index}
                         label={className}
                         color="primary"
                         variant="outlined"
+                        sx={{ fontSize: { xs: '0.75rem', sm: '0.8125rem', md: '0.875rem' } }}
                       />
                     ))}
                   </Box>
@@ -231,49 +261,56 @@ export default function TeacherSettings() {
           <Grid size={{ xs: 12, md: 4 }}>
             {/* Account Info */}
             <Card>
-              <CardContent>
-                <Typography variant="h6" gutterBottom sx={{ fontWeight: 'bold' }}>
+              <CardContent sx={{ p: { xs: 1.5, sm: 2, md: 3 } }}>
+                <Typography 
+                  variant="h6" 
+                  gutterBottom 
+                  sx={{ 
+                    fontWeight: 'bold',
+                    fontSize: { xs: '1rem', sm: '1.125rem', md: '1.25rem' }
+                  }}
+                >
                   Account Information
                 </Typography>
-                <Divider sx={{ my: 2 }} />
-                <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
+                <Divider sx={{ my: { xs: 1.5, md: 2 } }} />
+                <Box sx={{ display: 'flex', flexDirection: 'column', gap: { xs: 1.5, md: 2 } }}>
                   <Box>
-                    <Typography variant="caption" color="text.secondary">
+                    <Typography variant="caption" color="text.secondary" sx={{ fontSize: { xs: '0.7rem', sm: '0.75rem' } }}>
                       Account Type
                     </Typography>
-                    <Typography variant="body2" fontWeight="bold">
+                    <Typography variant="body2" fontWeight="bold" sx={{ fontSize: { xs: '0.875rem', sm: '1rem' } }}>
                       Teacher
                     </Typography>
                   </Box>
                   <Box>
-                    <Typography variant="caption" color="text.secondary">
+                    <Typography variant="caption" color="text.secondary" sx={{ fontSize: { xs: '0.7rem', sm: '0.75rem' } }}>
                       User ID
                     </Typography>
-                    <Typography variant="body2" fontWeight="bold">
+                    <Typography variant="body2" fontWeight="bold" sx={{ fontSize: { xs: '0.875rem', sm: '1rem' }, wordBreak: 'break-all' }}>
                       {user?.id || user?._id || 'teacher'}
                     </Typography>
                   </Box>
                   <Box>
-                    <Typography variant="caption" color="text.secondary">
+                    <Typography variant="caption" color="text.secondary" sx={{ fontSize: { xs: '0.7rem', sm: '0.75rem' } }}>
                       Subject
                     </Typography>
-                    <Typography variant="body2" fontWeight="bold" color="primary.main">
+                    <Typography variant="body2" fontWeight="bold" color="primary.main" sx={{ fontSize: { xs: '0.875rem', sm: '1rem' } }}>
                       {profileData.subject || 'Not Assigned'}
                     </Typography>
                   </Box>
                   <Box>
-                    <Typography variant="caption" color="text.secondary">
+                    <Typography variant="caption" color="text.secondary" sx={{ fontSize: { xs: '0.7rem', sm: '0.75rem' } }}>
                       Classes Teaching
                     </Typography>
-                    <Typography variant="body2" fontWeight="bold" color="primary.main">
+                    <Typography variant="body2" fontWeight="bold" color="primary.main" sx={{ fontSize: { xs: '0.875rem', sm: '1rem' } }}>
                       {profileData.classesTeaching?.length || 0} {profileData.classesTeaching?.length === 1 ? 'Class' : 'Classes'}
                     </Typography>
                   </Box>
                   <Box>
-                    <Typography variant="caption" color="text.secondary">
+                    <Typography variant="caption" color="text.secondary" sx={{ fontSize: { xs: '0.7rem', sm: '0.75rem' } }}>
                       Session
                     </Typography>
-                    <Typography variant="body2" fontWeight="bold" color="success.main">
+                    <Typography variant="body2" fontWeight="bold" color="success.main" sx={{ fontSize: { xs: '0.875rem', sm: '1rem' } }}>
                       Active
                     </Typography>
                   </Box>

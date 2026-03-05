@@ -98,61 +98,82 @@ export default function ParentSettings() {
 
   return (
     <ParentLayout>
-      <Box sx={{ pt: 3, pr: 3, pb: 3 }}>
+      <Box sx={{ pt: { xs: 1, sm: 2, md: 3 }, pr: { xs: 1, sm: 2, md: 3 }, pb: { xs: 1, sm: 2, md: 3 } }}>
         {/* Header */}
-        <Box sx={{ mb: 4 }}>
-          <Typography variant="h4" gutterBottom sx={{ fontWeight: 'bold' }}>
+        <Box sx={{ mb: { xs: 2, sm: 3, md: 4 } }}>
+          <Typography 
+            variant="h4" 
+            gutterBottom 
+            sx={{ 
+              fontWeight: 'bold',
+              fontSize: { xs: '1.25rem', sm: '1.5rem', md: '1.75rem', lg: '2.125rem' }
+            }}
+          >
             ⚙️ Settings
           </Typography>
-          <Typography variant="body1" color="text.secondary">
+          <Typography variant="body1" color="text.secondary" sx={{ fontSize: { xs: '0.8125rem', sm: '0.875rem', md: '1rem' } }}>
             Manage your account settings and preferences
           </Typography>
         </Box>
 
         {/* Success/Error Messages */}
         {successMessage && (
-          <Alert severity="success" sx={{ mb: 3 }}>
+          <Alert severity="success" sx={{ mb: { xs: 1.5, sm: 2, md: 3 }, fontSize: { xs: '0.75rem', sm: '0.8rem', md: '0.875rem' } }}>
             {successMessage}
           </Alert>
         )}
         {errorMessage && (
-          <Alert severity="error" sx={{ mb: 3 }}>
+          <Alert severity="error" sx={{ mb: { xs: 1.5, sm: 2, md: 3 }, fontSize: { xs: '0.75rem', sm: '0.8rem', md: '0.875rem' } }}>
             {errorMessage}
           </Alert>
         )}
 
-        <Grid container spacing={3}>
+        <Grid container spacing={{ xs: 1.5, sm: 2, md: 3 }}>
           {/* Profile Section */}
           <Grid item xs={12} md={8}>
             <Card>
-              <CardContent>
-                <Box sx={{ display: 'flex', alignItems: 'center', mb: 3 }}>
-                  <AccountCircleIcon color="primary" sx={{ mr: 1 }} />
-                  <Typography variant="h6" sx={{ fontWeight: 'bold' }}>
+              <CardContent sx={{ p: { xs: 1, sm: 1.5, md: 2, lg: 3 } }}>
+                <Box sx={{ display: 'flex', alignItems: 'center', mb: { xs: 1.5, sm: 2, md: 3 } }}>
+                  <AccountCircleIcon color="primary" sx={{ mr: { xs: 0.75, sm: 1 }, fontSize: { xs: '1.1rem', sm: '1.25rem', md: '1.5rem' } }} />
+                  <Typography variant="h6" sx={{ fontWeight: 'bold', fontSize: { xs: '0.9375rem', sm: '1rem', md: '1.125rem', lg: '1.25rem' } }}>
                     Profile Information
                   </Typography>
                 </Box>
                 
-                <Box sx={{ display: 'flex', alignItems: 'center', mb: 3 }}>
-                  <Avatar sx={{ width: 80, height: 80, bgcolor: 'primary.main', mr: 3 }}>
-                    <Typography variant="h4">
+                <Box sx={{ 
+                  display: 'flex', 
+                  flexDirection: { xs: 'column', sm: 'row' },
+                  alignItems: { xs: 'center', sm: 'center' },
+                  textAlign: { xs: 'center', sm: 'left' },
+                  mb: { xs: 1.5, sm: 2, md: 3 } 
+                }}>
+                  <Avatar sx={{ 
+                    width: { xs: 56, sm: 64, md: 72, lg: 80 }, 
+                    height: { xs: 56, sm: 64, md: 72, lg: 80 }, 
+                    bgcolor: 'primary.main', 
+                    mr: { xs: 0, sm: 2, md: 3 },
+                    mb: { xs: 1, sm: 0 }
+                  }}>
+                    <Typography variant="h4" sx={{ fontSize: { xs: '1.5rem', sm: '1.75rem', md: '2rem', lg: '2.125rem' } }}>
                       {profileData?.name?.charAt(0) || user?.name?.charAt(0) || 'P'}
                     </Typography>
                   </Avatar>
                   <Box>
-                    <Typography variant="h6">{profileData?.name || user?.name || 'Parent'}</Typography>
-                    <Typography variant="body2" color="text.secondary">
+                    <Typography variant="h6" sx={{ fontSize: { xs: '0.9375rem', sm: '1rem', md: '1.125rem', lg: '1.25rem' } }}>
+                      {profileData?.name || user?.name || 'Parent'}
+                    </Typography>
+                    <Typography variant="body2" color="text.secondary" sx={{ fontSize: { xs: '0.75rem', sm: '0.8rem', md: '0.875rem' } }}>
                       {profileData?.email || user?.email}
                     </Typography>
-                    <Typography variant="caption" color="text.secondary">
+                    <Typography variant="caption" color="text.secondary" sx={{ fontSize: { xs: '0.6875rem', sm: '0.7rem', md: '0.75rem' } }}>
                       Role: {user?.role?.toUpperCase() || 'PARENT'}
                     </Typography>
                   </Box>
                 </Box>
 
-                <Divider sx={{ mb: 3 }} />
+                <Divider sx={{ mb: { xs: 1.5, sm: 2, md: 3 } }} />
 
-                <Grid container spacing={2}>
+                <Grid container spacing={{ xs: 1.5, sm: 2 }}>
                   <Grid item xs={12}>
                     <TextField
                       label="Full Name"
@@ -182,20 +203,28 @@ export default function ParentSettings() {
                     />
                   </Grid>
                   <Grid item xs={12}>
-                    <Box sx={{ display: 'flex', gap: 2 }}>
+                    <Box sx={{ 
+                      display: 'flex', 
+                      flexDirection: { xs: 'column', sm: 'row' },
+                      gap: { xs: 1.5, sm: 2 } 
+                    }}>
                       <Button
                         variant="contained"
-                        startIcon={<SaveIcon />}
+                        startIcon={<SaveIcon sx={{ fontSize: { xs: '0.9rem', sm: '1rem', md: '1.25rem' } }} />}
                         onClick={handleProfileUpdate}
                         disabled={profileLoading}
+                        fullWidth={window.innerWidth < 600}
+                        sx={{ fontSize: { xs: '0.8125rem', sm: '0.875rem', md: '0.9375rem' } }}
                       >
                         Save Changes
                       </Button>
                       <Button
                         variant="outlined"
                         color="error"
-                        startIcon={<LogoutIcon />}
+                        startIcon={<LogoutIcon sx={{ fontSize: { xs: '0.9rem', sm: '1rem', md: '1.25rem' } }} />}
                         onClick={logout}
+                        fullWidth={window.innerWidth < 600}
+                        sx={{ fontSize: { xs: '0.8125rem', sm: '0.875rem', md: '0.9375rem' } }}
                       >
                         Logout
                       </Button>
@@ -207,33 +236,34 @@ export default function ParentSettings() {
 
             {/* Children Section */}
             {children.length > 0 && (
-              <Card sx={{ mt: 3 }}>
-                <CardContent>
-                  <Box sx={{ display: 'flex', alignItems: 'center', mb: 3 }}>
-                    <ChildCareIcon color="primary" sx={{ mr: 1 }} />
-                    <Typography variant="h6" sx={{ fontWeight: 'bold' }}>
+              <Card sx={{ mt: { xs: 2, md: 3 } }}>
+                <CardContent sx={{ p: { xs: 1, sm: 1.5, md: 2, lg: 3 } }}>
+                  <Box sx={{ display: 'flex', alignItems: 'center', mb: { xs: 1.5, sm: 2, md: 3 } }}>
+                    <ChildCareIcon color="primary" sx={{ mr: { xs: 0.75, sm: 1 }, fontSize: { xs: '1.1rem', sm: '1.25rem', md: '1.5rem' } }} />
+                    <Typography variant="h6" sx={{ fontWeight: 'bold', fontSize: { xs: '0.9375rem', sm: '1rem', md: '1.125rem', lg: '1.25rem' } }}>
                       My Children
                     </Typography>
                   </Box>
-                  <Grid container spacing={2}>
+                  <Grid container spacing={{ xs: 1.5, sm: 2 }}>
                     {children.map((child) => (
                       <Grid item xs={12} sm={6} key={child._id || child.id}>
                         <Card variant="outlined">
-                          <CardContent>
-                            <Typography variant="subtitle1" fontWeight="bold">
+                          <CardContent sx={{ p: { xs: 1, sm: 1.5, md: 2 } }}>
+                            <Typography variant="subtitle1" fontWeight="bold" sx={{ fontSize: { xs: '0.875rem', sm: '0.9375rem', md: '1rem' } }}>
                               {child.firstName} {child.lastName}
                             </Typography>
-                            <Typography variant="body2" color="text.secondary">
+                            <Typography variant="body2" color="text.secondary" sx={{ fontSize: { xs: '0.75rem', sm: '0.8125rem', md: '0.875rem' } }}>
                               Student ID: {child.studentId}
                             </Typography>
-                            <Typography variant="body2" color="text.secondary">
+                            <Typography variant="body2" color="text.secondary" sx={{ fontSize: { xs: '0.75rem', sm: '0.8125rem', md: '0.875rem' } }}>
                               Class: {child.class} {child.section}
                             </Typography>
-                            <Box sx={{ mt: 1 }}>
+                            <Box sx={{ mt: { xs: 0.75, sm: 1 } }}>
                               <Chip 
                                 label={child.gender} 
                                 size="small" 
                                 color={child.gender === 'male' ? 'info' : 'secondary'}
+                                sx={{ fontSize: { xs: '0.6875rem', sm: '0.75rem' }, height: { xs: '20px', sm: '24px' } }}
                               />
                             </Box>
                           </CardContent>
@@ -250,41 +280,48 @@ export default function ParentSettings() {
           <Grid item xs={12} md={4}>
             {/* Account Info */}
             <Card>
-              <CardContent>
-                <Typography variant="h6" gutterBottom sx={{ fontWeight: 'bold' }}>
+              <CardContent sx={{ p: { xs: 1, sm: 1.5, md: 2, lg: 3 } }}>
+                <Typography 
+                  variant="h6" 
+                  gutterBottom 
+                  sx={{ 
+                    fontWeight: 'bold',
+                    fontSize: { xs: '0.9375rem', sm: '1rem', md: '1.125rem', lg: '1.25rem' }
+                  }}
+                >
                   Account Information
                 </Typography>
-                <Divider sx={{ my: 2 }} />
-                <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
+                <Divider sx={{ my: { xs: 1.5, md: 2 } }} />
+                <Box sx={{ display: 'flex', flexDirection: 'column', gap: { xs: 1.5, sm: 2 } }}>
                   <Box>
-                    <Typography variant="caption" color="text.secondary">
+                    <Typography variant="caption" color="text.secondary" sx={{ fontSize: { xs: '0.6875rem', sm: '0.7rem', md: '0.75rem' } }}>
                       Account Type
                     </Typography>
-                    <Typography variant="body2" fontWeight="bold">
+                    <Typography variant="body2" fontWeight="bold" sx={{ fontSize: { xs: '0.8125rem', sm: '0.875rem', md: '1rem' } }}>
                       Parent
                     </Typography>
                   </Box>
                   <Box>
-                    <Typography variant="caption" color="text.secondary">
+                    <Typography variant="caption" color="text.secondary" sx={{ fontSize: { xs: '0.6875rem', sm: '0.7rem', md: '0.75rem' } }}>
                       User ID
                     </Typography>
-                    <Typography variant="body2" fontWeight="bold">
+                    <Typography variant="body2" fontWeight="bold" sx={{ fontSize: { xs: '0.8125rem', sm: '0.875rem', md: '1rem' }, wordBreak: 'break-all' }}>
                       {user?.id || user?._id || 'parent'}
                     </Typography>
                   </Box>
                   <Box>
-                    <Typography variant="caption" color="text.secondary">
+                    <Typography variant="caption" color="text.secondary" sx={{ fontSize: { xs: '0.6875rem', sm: '0.7rem', md: '0.75rem' } }}>
                       Linked Children
                     </Typography>
-                    <Typography variant="body2" fontWeight="bold" color="primary.main">
+                    <Typography variant="body2" fontWeight="bold" color="primary.main" sx={{ fontSize: { xs: '0.8125rem', sm: '0.875rem', md: '1rem' } }}>
                       {children.length} {children.length === 1 ? 'Child' : 'Children'}
                     </Typography>
                   </Box>
                   <Box>
-                    <Typography variant="caption" color="text.secondary">
+                    <Typography variant="caption" color="text.secondary" sx={{ fontSize: { xs: '0.6875rem', sm: '0.7rem', md: '0.75rem' } }}>
                       Session
                     </Typography>
-                    <Typography variant="body2" fontWeight="bold" color="success.main">
+                    <Typography variant="body2" fontWeight="bold" color="success.main" sx={{ fontSize: { xs: '0.8125rem', sm: '0.875rem', md: '1rem' } }}>
                       Active
                     </Typography>
                   </Box>

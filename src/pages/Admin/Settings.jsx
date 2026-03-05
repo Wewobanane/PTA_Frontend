@@ -78,13 +78,24 @@ export default function AdminSettings() {
 
   return (
     <AdminLayout>
-      <Box sx={{ pt: 3, pr: 3, pb: 3 }}>
+      <Box sx={{ p: { sm: 2, md: 3 } }}>
         {/* Header */}
-        <Box sx={{ mb: 4 }}>
-          <Typography variant="h4" gutterBottom sx={{ fontWeight: 'bold' }}>
+        <Box sx={{ mb: { sm: 3, md: 4 } }}>
+          <Typography 
+            variant="h4" 
+            gutterBottom 
+            sx={{ 
+              fontWeight: 'bold',
+              fontSize: { sm: '1.75rem', md: '2.125rem' }
+            }}
+          >
             ⚙️ Settings
           </Typography>
-          <Typography variant="body1" color="text.secondary">
+          <Typography 
+            variant="body1" 
+            color="text.secondary"
+            sx={{ fontSize: { sm: '0.875rem', md: '1rem' } }}
+          >
             Manage your account settings and preferences
           </Typography>
         </Box>
@@ -101,36 +112,44 @@ export default function AdminSettings() {
           </Alert>
         )}
 
-        <Grid container spacing={3}>
+        <Grid container spacing={{ sm: 2, md: 3 }}>
           {/* Profile Section */}
           <Grid item xs={12} md={8}>
             <Card>
-              <CardContent>
-                <Box sx={{ display: 'flex', alignItems: 'center', mb: 3 }}>
-                  <AccountCircleIcon color="primary" sx={{ mr: 1 }} />
-                  <Typography variant="h6" sx={{ fontWeight: 'bold' }}>
+              <CardContent sx={{ p: { sm: 2, md: 3 } }}>
+                <Box sx={{ display: 'flex', alignItems: 'center', mb: { sm: 2, md: 3 } }}>
+                  <AccountCircleIcon color="primary" sx={{ mr: 1, fontSize: { sm: 24, md: 28 } }} />
+                  <Typography 
+                    variant="h6" 
+                    sx={{ 
+                      fontWeight: 'bold',
+                      fontSize: { sm: '1rem', md: '1.25rem' }
+                    }}
+                  >
                     Profile Information
                   </Typography>
                 </Box>
                 
-                <Box sx={{ display: 'flex', alignItems: 'center', mb: 3 }}>
-                  <Avatar sx={{ width: 80, height: 80, bgcolor: 'primary.main', mr: 3 }}>
-                    <Typography variant="h4">
+                <Box sx={{ display: 'flex', alignItems: 'center', mb: { sm: 2, md: 3 }, flexDirection: { sm: 'column', md: 'row' }, textAlign: { sm: 'center', md: 'left' } }}>
+                  <Avatar sx={{ width: { sm: 64, md: 80 }, height: { sm: 64, md: 80 }, bgcolor: 'primary.main', mr: { sm: 0, md: 3 }, mb: { sm: 2, md: 0 } }}>
+                    <Typography variant="h4" sx={{ fontSize: { sm: '2rem', md: '2.5rem' } }}>
                       {profileData?.name?.charAt(0) || user?.name?.charAt(0) || 'A'}
                     </Typography>
                   </Avatar>
                   <Box>
-                    <Typography variant="h6">{profileData?.name || user?.name || 'Administrator'}</Typography>
-                    <Typography variant="body2" color="text.secondary">
+                    <Typography variant="h6" sx={{ fontSize: { sm: '1rem', md: '1.25rem' } }}>
+                      {profileData?.name || user?.name || 'Administrator'}
+                    </Typography>
+                    <Typography variant="body2" color="text.secondary" sx={{ fontSize: { sm: '0.8rem', md: '0.875rem' } }}>
                       {profileData?.email || user?.email}
                     </Typography>
-                    <Typography variant="caption" color="text.secondary">
+                    <Typography variant="caption" color="text.secondary" sx={{ fontSize: { sm: '0.7rem', md: '0.75rem' } }}>
                       Role: {user?.role?.toUpperCase() || 'ADMIN'}
                     </Typography>
                   </Box>
                 </Box>
 
-                <Divider sx={{ mb: 3 }} />
+                <Divider sx={{ mb: { sm: 2, md: 3 } }} />
 
                 <Grid container spacing={2}>
                   <Grid item xs={12}>
@@ -162,12 +181,14 @@ export default function AdminSettings() {
                     />
                   </Grid>
                   <Grid item xs={12}>
-                    <Box sx={{ display: 'flex', gap: 2 }}>
+                    <Box sx={{ display: 'flex', gap: { sm: 1.5, md: 2 }, flexDirection: { sm: 'column', md: 'row' } }}>
                       <Button
                         variant="contained"
                         startIcon={<SaveIcon />}
                         onClick={handleProfileUpdate}
                         disabled={profileLoading}
+                        fullWidth={{ sm: true, md: false }}
+                        sx={{ fontSize: { sm: '0.875rem', md: '1rem' } }}
                       >
                         Save Changes
                       </Button>
@@ -176,6 +197,8 @@ export default function AdminSettings() {
                         color="error"
                         startIcon={<LogoutIcon />}
                         onClick={logout}
+                        fullWidth={{ sm: true, md: false }}
+                        sx={{ fontSize: { sm: '0.875rem', md: '1rem' } }}
                       >
                         Logout
                       </Button>
@@ -190,41 +213,48 @@ export default function AdminSettings() {
           <Grid item xs={12} md={4}>
             {/* Account Info */}
             <Card>
-              <CardContent>
-                <Typography variant="h6" gutterBottom sx={{ fontWeight: 'bold' }}>
+              <CardContent sx={{ p: { sm: 2, md: 3 } }}>
+                <Typography 
+                  variant="h6" 
+                  gutterBottom 
+                  sx={{ 
+                    fontWeight: 'bold',
+                    fontSize: { sm: '1rem', md: '1.25rem' }
+                  }}
+                >
                   Account Information
                 </Typography>
-                <Divider sx={{ my: 2 }} />
-                <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
+                <Divider sx={{ my: { sm: 1.5, md: 2 } }} />
+                <Box sx={{ display: 'flex', flexDirection: 'column', gap: { sm: 1.5, md: 2 } }}>
                   <Box>
-                    <Typography variant="caption" color="text.secondary">
+                    <Typography variant="caption" color="text.secondary" sx={{ fontSize: { sm: '0.7rem', md: '0.75rem' } }}>
                       Account Type
                     </Typography>
-                    <Typography variant="body2" fontWeight="bold">
+                    <Typography variant="body2" fontWeight="bold" sx={{ fontSize: { sm: '0.875rem', md: '1rem' } }}>
                       Administrator
                     </Typography>
                   </Box>
                   <Box>
-                    <Typography variant="caption" color="text.secondary">
+                    <Typography variant="caption" color="text.secondary" sx={{ fontSize: { sm: '0.7rem', md: '0.75rem' } }}>
                       User ID
                     </Typography>
-                    <Typography variant="body2" fontWeight="bold">
+                    <Typography variant="body2" fontWeight="bold" sx={{ fontSize: { sm: '0.875rem', md: '1rem' }, wordBreak: 'break-all' }}>
                       {user?.id || user?._id || 'admin'}
                     </Typography>
                   </Box>
                   <Box>
-                    <Typography variant="caption" color="text.secondary">
+                    <Typography variant="caption" color="text.secondary" sx={{ fontSize: { sm: '0.7rem', md: '0.75rem' } }}>
                       Access Level
                     </Typography>
-                    <Typography variant="body2" fontWeight="bold" color="error">
+                    <Typography variant="body2" fontWeight="bold" color="error" sx={{ fontSize: { sm: '0.875rem', md: '1rem' } }}>
                       Full System Access
                     </Typography>
                   </Box>
                   <Box>
-                    <Typography variant="caption" color="text.secondary">
+                    <Typography variant="caption" color="text.secondary" sx={{ fontSize: { sm: '0.7rem', md: '0.75rem' } }}>
                       Session
                     </Typography>
-                    <Typography variant="body2" fontWeight="bold" color="success.main">
+                    <Typography variant="body2" fontWeight="bold" color="success.main" sx={{ fontSize: { sm: '0.875rem', md: '1rem' } }}>
                       Active
                     </Typography>
                   </Box>
