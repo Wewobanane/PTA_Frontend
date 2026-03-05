@@ -101,7 +101,7 @@ function AuthPage() {
         alignItems: 'center',
         justifyContent: 'center',
         background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
-        p: 2,
+        p: { xs: 1, sm: 2 },
         m: 0,
         position: 'fixed',
         top: 0,
@@ -113,29 +113,40 @@ function AuthPage() {
         <Paper
           elevation={24}
           sx={{
-            p: 4,
-            borderRadius: 3,
+            p: { xs: 2, sm: 3, md: 4 },
+            borderRadius: { xs: 2, sm: 3 },
             background: 'rgba(255, 255, 255, 0.95)',
             backdropFilter: 'blur(10px)',
           }}
         >
           {/* Header */}
-          <Box sx={{ textAlign: 'center', mb: 4 }}>
+          <Box sx={{ textAlign: 'center', mb: { xs: 3, sm: 4 } }}>
             <Avatar
               sx={{
-                width: 64,
-                height: 64,
+                width: { xs: 56, sm: 64 },
+                height: { xs: 56, sm: 64 },
                 mx: 'auto',
-                mb: 2,
+                mb: { xs: 1.5, sm: 2 },
                 bgcolor: 'primary.main',
               }}
             >
-              <School sx={{ fontSize: 40 }} />
+              <School sx={{ fontSize: { xs: 32, sm: 40 } }} />
             </Avatar>
-            <Typography variant="h4" sx={{ fontWeight: 'bold', mb: 1 }}>
+            <Typography 
+              variant="h4" 
+              sx={{ 
+                fontWeight: 'bold', 
+                mb: 1,
+                fontSize: { xs: '1.5rem', sm: '2rem', md: '2.125rem' }
+              }}
+            >
               PTA Management System
             </Typography>
-            <Typography variant="body2" color="text.secondary">
+            <Typography 
+              variant="body2" 
+              color="text.secondary"
+              sx={{ fontSize: { xs: '0.75rem', sm: '0.875rem' } }}
+            >
               Connecting Parents, Teachers, and Administrators
             </Typography>
           </Box>
@@ -155,8 +166,15 @@ function AuthPage() {
           {/* Login Form */}
           <Box component="form" onSubmit={handleLogin}>
             {/* Role Selection */}
-            <Box sx={{ mb: 3 }}>
-              <Typography variant="body2" sx={{ mb: 1, fontWeight: 500 }}>
+            <Box sx={{ mb: { xs: 2, sm: 3 } }}>
+              <Typography 
+                variant="body2" 
+                sx={{ 
+                  mb: 1, 
+                  fontWeight: 500,
+                  fontSize: { xs: '0.8rem', sm: '0.875rem' }
+                }}
+              >
                 Select Your Role
               </Typography>
               <ToggleButtonGroup
@@ -165,10 +183,19 @@ function AuthPage() {
                 onChange={handleLoginRoleChange}
                 fullWidth
                 color="primary"
+                orientation="vertical"
+                sx={{
+                  '& .MuiToggleButton-root': {
+                    py: { xs: 1.5, sm: 1 },
+                    fontSize: { xs: '0.875rem', sm: '1rem' }
+                  },
+                  display: { xs: 'flex', sm: 'inline-flex' },
+                  flexDirection: { xs: 'column', sm: 'row' }
+                }}
               >
                 {roles.map((role) => (
                   <ToggleButton key={role.value} value={role.value}>
-                    <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+                    <Box sx={{ display: 'flex', alignItems: 'center', gap: { xs: 1.5, sm: 1 } }}>
                       {role.icon}
                       <Typography variant="body2">{role.label}</Typography>
                     </Box>
@@ -227,7 +254,10 @@ function AuthPage() {
               variant="contained"
               size="large"
               disabled={loading}
-              sx={{ py: 1.5 }}
+              sx={{ 
+                py: { xs: 1.2, sm: 1.5 },
+                fontSize: { xs: '0.9rem', sm: '1rem' }
+              }}
             >
               {loading ? <CircularProgress size={24} /> : `Login as ${roles.find(r => r.value === loginData.role)?.label}`}
             </Button>
@@ -237,7 +267,14 @@ function AuthPage() {
           <Typography
             variant="body2"
             color="text.secondary"
-            sx={{ textAlign: 'center', mt: 3, p: 2, bgcolor: 'grey.100', borderRadius: 1 }}
+            sx={{ 
+              textAlign: 'center', 
+              mt: { xs: 2, sm: 3 }, 
+              p: { xs: 1.5, sm: 2 }, 
+              bgcolor: 'grey.100', 
+              borderRadius: 1,
+              fontSize: { xs: '0.75rem', sm: '0.875rem' }
+            }}
           >
             📧 New users must be invited by an administrator. Check your email for an activation link.
           </Typography>

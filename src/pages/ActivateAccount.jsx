@@ -174,9 +174,10 @@ function ActivateAccount() {
           alignItems: 'center',
           justifyContent: 'center',
           background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+          p: { xs: 2, sm: 3 },
         }}
       >
-        <CircularProgress size={60} sx={{ color: 'white' }} />
+        <CircularProgress size={{ xs: 50, sm: 60 }} sx={{ color: 'white' }} />
       </Box>
     );
   }
@@ -190,27 +191,42 @@ function ActivateAccount() {
           alignItems: 'center',
           justifyContent: 'center',
           background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+          p: { xs: 2, sm: 3 },
         }}
       >
         <Container maxWidth="sm">
-          <Paper elevation={6} sx={{ p: 4, textAlign: 'center' }}>
+          <Paper elevation={6} sx={{ p: { xs: 3, sm: 4 }, textAlign: 'center' }}>
             <Avatar
               sx={{
                 bgcolor: 'error.main',
-                width: 80,
-                height: 80,
-                margin: '0 auto 20px',
+                width: { xs: 64, sm: 80 },
+                height: { xs: 64, sm: 80 },
+                margin: { xs: '0 auto 16px', sm: '0 auto 20px' },
               }}
             >
-              <LockOpen sx={{ fontSize: 40 }} />
+              <LockOpen sx={{ fontSize: { xs: 32, sm: 40 } }} />
             </Avatar>
-            <Typography variant="h5" sx={{ fontWeight: 'bold', mb: 2 }}>
+            <Typography 
+              variant="h5" 
+              sx={{ 
+                fontWeight: 'bold', 
+                mb: 2,
+                fontSize: { xs: '1.25rem', sm: '1.5rem' }
+              }}
+            >
               Invalid Activation Link
             </Typography>
-            <Alert severity="error" sx={{ mb: 3 }}>
+            <Alert severity="error" sx={{ mb: { xs: 2, sm: 3 }, fontSize: { xs: '0.8rem', sm: '0.875rem' } }}>
               {error}
             </Alert>
-            <Typography variant="body2" color="text.secondary" sx={{ mb: 3 }}>
+            <Typography 
+              variant="body2" 
+              color="text.secondary" 
+              sx={{ 
+                mb: { xs: 2, sm: 3 },
+                fontSize: { xs: '0.8rem', sm: '0.875rem' }
+              }}
+            >
               This activation link may have expired or already been used.
               Please contact the school administrator for a new invitation.
             </Typography>
@@ -218,6 +234,7 @@ function ActivateAccount() {
               variant="contained"
               onClick={() => navigate('/login')}
               fullWidth
+              sx={{ py: { xs: 1, sm: 1.5 } }}
             >
               Go to Login
             </Button>
@@ -236,27 +253,35 @@ function ActivateAccount() {
           alignItems: 'center',
           justifyContent: 'center',
           background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+          p: { xs: 2, sm: 3 },
         }}
       >
         <Container maxWidth="sm">
-          <Paper elevation={6} sx={{ p: 4, textAlign: 'center' }}>
+          <Paper elevation={6} sx={{ p: { xs: 3, sm: 4 }, textAlign: 'center' }}>
             <Avatar
               sx={{
                 bgcolor: 'success.main',
-                width: 80,
-                height: 80,
-                margin: '0 auto 20px',
+                width: { xs: 64, sm: 80 },
+                height: { xs: 64, sm: 80 },
+                margin: { xs: '0 auto 16px', sm: '0 auto 20px' },
               }}
             >
-              <CheckCircle sx={{ fontSize: 40 }} />
+              <CheckCircle sx={{ fontSize: { xs: 32, sm: 40 } }} />
             </Avatar>
-            <Typography variant="h5" sx={{ fontWeight: 'bold', mb: 2 }}>
+            <Typography 
+              variant="h5" 
+              sx={{ 
+                fontWeight: 'bold', 
+                mb: 2,
+                fontSize: { xs: '1.25rem', sm: '1.5rem' }
+              }}
+            >
               Account Activated!
             </Typography>
-            <Alert severity="success" sx={{ mb: 3 }}>
+            <Alert severity="success" sx={{ mb: { xs: 2, sm: 3 }, fontSize: { xs: '0.8rem', sm: '0.875rem' } }}>
               Your account has been successfully activated. Redirecting to your dashboard...
             </Alert>
-            <CircularProgress />
+            <CircularProgress size={{ xs: 35, sm: 40 }} />
           </Paper>
         </Container>
       </Box>
@@ -271,51 +296,70 @@ function ActivateAccount() {
         alignItems: 'center',
         justifyContent: 'center',
         background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
-        py: 4,
+        py: { xs: 2, sm: 3, md: 4 },
+        px: { xs: 2, sm: 3 },
       }}
     >
       <Container maxWidth="sm">
-        <Paper elevation={6} sx={{ p: 4 }}>
+        <Paper elevation={6} sx={{ p: { xs: 2.5, sm: 3, md: 4 } }}>
           {/* Header */}
-          <Box sx={{ textAlign: 'center', mb: 4 }}>
+          <Box sx={{ textAlign: 'center', mb: { xs: 3, sm: 4 } }}>
             <Avatar
               sx={{
                 bgcolor: 'primary.main',
-                width: 80,
-                height: 80,
-                margin: '0 auto 20px',
+                width: { xs: 64, sm: 80 },
+                height: { xs: 64, sm: 80 },
+                margin: { xs: '0 auto 16px', sm: '0 auto 20px' },
               }}
             >
-              <Person sx={{ fontSize: 40 }} />
+              <Person sx={{ fontSize: { xs: 32, sm: 40 } }} />
             </Avatar>
-            <Typography variant="h4" sx={{ fontWeight: 'bold', mb: 1 }}>
+            <Typography 
+              variant="h4" 
+              sx={{ 
+                fontWeight: 'bold', 
+                mb: 1,
+                fontSize: { xs: '1.5rem', sm: '2rem', md: '2.125rem' }
+              }}
+            >
               Welcome{tokenData?.name ? `, ${tokenData.name}` : ''}!
             </Typography>
-            <Typography variant="body1" color="text.secondary">
+            <Typography 
+              variant="body1" 
+              color="text.secondary"
+              sx={{ fontSize: { xs: '0.875rem', sm: '1rem' } }}
+            >
               Activate your {tokenData?.role || 'account'}
             </Typography>
           </Box>
 
-          <Divider sx={{ mb: 3 }} />
+          <Divider sx={{ mb: { xs: 2, sm: 3 } }} />
 
           {/* Account Info */}
-          <Alert severity="info" sx={{ mb: 3 }}>
-            <Typography variant="body2">
+          <Alert severity="info" sx={{ mb: { xs: 2, sm: 3 } }}>
+            <Typography variant="body2" sx={{ fontSize: { xs: '0.8rem', sm: '0.875rem' } }}>
               <strong>Email:</strong> {tokenData?.email}
             </Typography>
-            <Typography variant="body2">
+            <Typography variant="body2" sx={{ fontSize: { xs: '0.8rem', sm: '0.875rem' } }}>
               <strong>Role:</strong> {tokenData?.role?.charAt(0).toUpperCase() + tokenData?.role?.slice(1)}
             </Typography>
           </Alert>
 
           {/* Password Form */}
           <form onSubmit={handleActivate}>
-            <Typography variant="h6" sx={{ fontWeight: 'bold', mb: 2 }}>
+            <Typography 
+              variant="h6" 
+              sx={{ 
+                fontWeight: 'bold', 
+                mb: { xs: 1.5, sm: 2 },
+                fontSize: { xs: '1.1rem', sm: '1.25rem' }
+              }}
+            >
               Set Your Password
             </Typography>
 
             {error && (
-              <Alert severity="error" sx={{ mb: 2 }}>
+              <Alert severity="error" sx={{ mb: 2, fontSize: { xs: '0.8rem', sm: '0.875rem' } }}>
                 {error}
               </Alert>
             )}
@@ -341,7 +385,18 @@ function ActivateAccount() {
                   </InputAdornment>
                 ),
               }}
+              sx={{ 
+                '& .MuiInputBase-input': { 
+                  fontSize: { xs: '0.9rem', sm: '1rem' } 
+                },
+                '& .MuiInputLabel-root': { 
+                  fontSize: { xs: '0.9rem', sm: '1rem' } 
+                }
+              }}
               helperText="At least 8 characters, including uppercase, lowercase, and number"
+              FormHelperTextProps={{
+                sx: { fontSize: { xs: '0.7rem', sm: '0.75rem' } }
+              }}
             />
 
             <TextField
@@ -364,9 +419,17 @@ function ActivateAccount() {
                   </InputAdornment>
                 ),
               }}
+              sx={{ 
+                '& .MuiInputBase-input': { 
+                  fontSize: { xs: '0.9rem', sm: '1rem' } 
+                },
+                '& .MuiInputLabel-root': { 
+                  fontSize: { xs: '0.9rem', sm: '1rem' } 
+                }
+              }}
             />
 
-            <Box sx={{ mt: 3 }}>
+            <Box sx={{ mt: { xs: 2, sm: 3 } }}>
               <Button
                 type="submit"
                 variant="contained"
@@ -374,14 +437,14 @@ function ActivateAccount() {
                 size="large"
                 disabled={activating}
                 sx={{
-                  py: 1.5,
-                  fontSize: '1.1rem',
+                  py: { xs: 1.2, sm: 1.5 },
+                  fontSize: { xs: '0.95rem', sm: '1.1rem' },
                   fontWeight: 'bold',
                 }}
               >
                 {activating ? (
                   <>
-                    <CircularProgress size={24} sx={{ mr: 1 }} />
+                    <CircularProgress size={{ xs: 20, sm: 24 }} sx={{ mr: 1 }} />
                     Activating Account...
                   </>
                 ) : (
@@ -391,11 +454,15 @@ function ActivateAccount() {
             </Box>
           </form>
 
-          <Divider sx={{ my: 3 }} />
+          <Divider sx={{ my: { xs: 2, sm: 3 } }} />
 
           {/* Footer */}
           <Box sx={{ textAlign: 'center' }}>
-            <Typography variant="caption" color="text.secondary">
+            <Typography 
+              variant="caption" 
+              color="text.secondary"
+              sx={{ fontSize: { xs: '0.7rem', sm: '0.75rem' } }}
+            >
               🔒 Your password is encrypted and secure
             </Typography>
           </Box>
