@@ -70,7 +70,7 @@ function Messages() {
 
         <Grid container spacing={3}>
           {/* Conversations List */}
-          <Grid item xs={12} md={4}>
+          <Grid size={{ xs: 12, md: 4 }}>
             <Card elevation={2}>
               <CardContent>
                 <Box sx={{ display: 'flex', alignItems: 'center', mb: 2 }}>
@@ -142,7 +142,7 @@ function Messages() {
           </Grid>
 
           {/* Message Thread */}
-          <Grid item xs={12} md={8}>
+          <Grid size={{ xs: 12, md: 8 }}>
             {selectedConversation ? (
               <Card elevation={2} sx={{ height: '70vh', display: 'flex', flexDirection: 'column' }}>
                 {/* Header */}

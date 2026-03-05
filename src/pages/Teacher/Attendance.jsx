@@ -241,7 +241,7 @@ function Attendance() {
             <Card elevation={2} sx={{ mb: 3 }}>
           <CardContent>
             <Grid container spacing={2}>
-              <Grid item xs={12} md={6}>
+              <Grid size={{ xs: 12, md: 6 }}>
                 <FormControl fullWidth>
                   <InputLabel>Select Class</InputLabel>
                   <Select
@@ -261,7 +261,7 @@ function Attendance() {
                 </FormControl>
               </Grid>
 
-              <Grid item xs={12} md={6}>
+              <Grid size={{ xs: 12, md: 6 }}>
                 <FormControl fullWidth>
                   <InputLabel shrink>Date</InputLabel>
                   <Select
@@ -311,7 +311,7 @@ function Attendance() {
           <>
             {/* Summary */}
             <Grid container spacing={2} sx={{ mb: 3 }}>
-              <Grid item xs={12} md={4}>
+              <Grid size={{ xs: 12, md: 4 }}>
                 <Paper sx={{ p: 2, bgcolor: 'info.light' }}>
                   <Typography variant="h6" sx={{ fontWeight: 'bold' }}>
                     {students.length}
@@ -319,7 +319,7 @@ function Attendance() {
                   <Typography variant="body2">Total Students</Typography>
                 </Paper>
               </Grid>
-              <Grid item xs={12} md={4}>
+              <Grid size={{ xs: 12, md: 4 }}>
                 <Paper sx={{ p: 2, bgcolor: 'success.light' }}>
                   <Typography variant="h6" sx={{ fontWeight: 'bold' }}>
                     {presentCount}
@@ -327,7 +327,7 @@ function Attendance() {
                   <Typography variant="body2">Present</Typography>
                 </Paper>
               </Grid>
-              <Grid item xs={12} md={4}>
+              <Grid size={{ xs: 12, md: 4 }}>
                 <Paper sx={{ p: 2, bgcolor: 'error.light' }}>
                   <Typography variant="h6" sx={{ fontWeight: 'bold' }}>
                     {absentCount}

@@ -214,10 +214,16 @@ function Teachers() {
           setTimeout(() => fetchTeachers(), 100);
         }
       } else {
-        const response = await api.post('/admin/teachers', {
-          name: formData.name,
-          email: formData.email
-        });
+        const payload = {
+          name: formData.name.trim(),
+          email: formData.email.trim(),
+          role: 'teacher'
+        };
+        console.log('Creating teacher with payload:', payload);
+        
+        const response = await api.post('/admin/teachers', payload);
+        console.log('Create teacher response:', response.data);
+        
         if (response.data.success) {
           setSuccess('Teacher invitation sent successfully!');
           handleCloseDialog();
@@ -228,7 +234,9 @@ function Teachers() {
       }
     } catch (err) {
       console.error('Teacher submit error:', err);
-      setError(err.response?.data?.message || `Failed to ${editingTeacher ? 'update' : 'invite'} teacher`);
+      console.error('Error response:', err.response?.data);
+      console.error('Error status:', err.response?.status);
+      setError(err.response?.data?.message || err.response?.data?.error || `Failed to ${editingTeacher ? 'update' : 'invite'} teacher`);
     }
   };
 

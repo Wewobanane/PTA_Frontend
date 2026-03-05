@@ -311,7 +311,7 @@ function TeacherMessages() {
 
         <Grid container spacing={3}>
           {/* Messages List */}
-          <Grid item xs={12} md={selectedMessage ? 5 : 12}>
+          <Grid size={{ xs: 12, md: selectedMessage ? 5 : 12 }}>
             <Card elevation={2}>
               <CardHeader
                 title={
@@ -416,7 +416,7 @@ function TeacherMessages() {
 
           {/* Message Detail */}
           {selectedMessage && (
-            <Grid item xs={12} md={7}>
+            <Grid size={{ xs: 12, md: 7 }}>
               <Card elevation={2}>
                 <CardHeader
                   title={
@@ -636,7 +636,7 @@ function TeacherMessages() {
                   />
 
                   <Grid container spacing={2}>
-                    <Grid item xs={6}>
+                    <Grid size={{ xs: 6 }}>
                       <FormControl fullWidth>
                         <InputLabel>Priority</InputLabel>
                         <Select
@@ -651,7 +651,7 @@ function TeacherMessages() {
                         </Select>
                       </FormControl>
                     </Grid>
-                    <Grid item xs={6}>
+                    <Grid size={{ xs: 6 }}>
                       <FormControl fullWidth>
                         <InputLabel>Category</InputLabel>
                         <Select

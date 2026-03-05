@@ -292,7 +292,7 @@ function ClassDetails() {
 
                 {tabValue === 1 && (
                   <Grid container spacing={3}>
-                    <Grid item xs={12} md={6}>
+                    <Grid size={{ xs: 12, md: 6 }}>
                       <Paper sx={{ p: 3, bgcolor: 'primary.light' }}>
                         <Typography variant="h6" sx={{ fontWeight: 'bold', mb: 2 }}>
                           Class Information
@@ -320,7 +320,7 @@ function ClassDetails() {
                       </Paper>
                     </Grid>
 
-                    <Grid item xs={12} md={6}>
+                    <Grid size={{ xs: 12, md: 6 }}>
                       <Paper sx={{ p: 3, bgcolor: 'success.light' }}>
                         <Typography variant="h6" sx={{ fontWeight: 'bold', mb: 2 }}>
                           Class Statistics

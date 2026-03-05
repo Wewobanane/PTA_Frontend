@@ -110,7 +110,7 @@ export default function TeacherSettings() {
 
         <Grid container spacing={3}>
           {/* Profile Section */}
-          <Grid item xs={12} md={8}>
+          <Grid size={{ xs: 12, md: 8 }}>
             <Card>
               <CardContent>
                 <Box sx={{ display: 'flex', alignItems: 'center', mb: 3 }}>
@@ -140,7 +140,7 @@ export default function TeacherSettings() {
                 <Divider sx={{ mb: 3 }} />
 
                 <Grid container spacing={2}>
-                  <Grid item xs={12}>
+                  <Grid size={{ xs: 12 }}>
                     <TextField
                       label="Full Name"
                       fullWidth
@@ -149,7 +149,7 @@ export default function TeacherSettings() {
                       disabled={profileLoading}
                     />
                   </Grid>
-                  <Grid item xs={12}>
+                  <Grid size={{ xs: 12 }}>
                     <TextField
                       label="Email Address"
                       fullWidth
@@ -158,7 +158,7 @@ export default function TeacherSettings() {
                       helperText="Email cannot be changed"
                     />
                   </Grid>
-                  <Grid item xs={12}>
+                  <Grid size={{ xs: 12 }}>
                     <TextField
                       label="Phone Number"
                       fullWidth
@@ -168,7 +168,7 @@ export default function TeacherSettings() {
                       helperText={profileLoading ? 'Loading...' : undefined}
                     />
                   </Grid>
-                  <Grid item xs={12}>
+                  <Grid size={{ xs: 12 }}>
                     <TextField
               label="Subject(s) You Teach"
                       fullWidth
@@ -178,7 +178,7 @@ export default function TeacherSettings() {
               helperText={profileLoading ? 'Loading...' : 'Example: Mathematics, English, Science'}
                     />
                   </Grid>
-                  <Grid item xs={12}>
+                  <Grid size={{ xs: 12 }}>
                     <Box sx={{ display: 'flex', gap: 2 }}>
                       <Button
                         variant="contained"
@@ -228,7 +228,7 @@ export default function TeacherSettings() {
           </Grid>
 
           {/* Right Column */}
-          <Grid item xs={12} md={4}>
+          <Grid size={{ xs: 12, md: 4 }}>
             {/* Account Info */}
             <Card>
               <CardContent>

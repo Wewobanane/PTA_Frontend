@@ -391,7 +391,7 @@ function Assessments() {
                 {/* Assessment Types Info */}
             <Grid container spacing={2} sx={{ mb: 4 }}>
               {assessmentTypes.map((type) => (
-                <Grid item xs={12} md={4} key={type.value}>
+                <Grid size={{ xs: 12, md: 4 }} key={type.value}>
                   <Card sx={{ borderLeft: `4px solid ${type.color}` }}>
                     <CardContent>
                       <Typography variant="h6" sx={{ fontWeight: 'bold', mb: 1 }}>
@@ -425,7 +425,7 @@ function Assessments() {
                   View Assessments
                 </Typography>
                 <Grid container spacing={2}>
-                  <Grid item xs={12} md={6}>
+                  <Grid size={{ xs: 12, md: 6 }}>
                     <FormControl fullWidth>
                       <InputLabel>Select Class</InputLabel>
                       <Select
@@ -442,7 +442,7 @@ function Assessments() {
                       </Select>
                     </FormControl>
                   </Grid>
-                  <Grid item xs={12} md={6}>
+                  <Grid size={{ xs: 12, md: 6 }}>
                     <FormControl fullWidth>
                       <InputLabel>Select Subject</InputLabel>
                       <Select
@@ -798,7 +798,7 @@ function Assessments() {
           <DialogContent sx={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
             <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2, mt: 2, flex: 1 }}>
               <Grid container spacing={2}>
-                <Grid item xs={12} md={6}>
+                <Grid size={{ xs: 12, md: 6 }}>
                   <FormControl fullWidth>
                     <InputLabel>Select Class</InputLabel>
                     <Select
@@ -818,7 +818,7 @@ function Assessments() {
                   </FormControl>
                 </Grid>
 
-                <Grid item xs={12} md={6}>
+                <Grid size={{ xs: 12, md: 6 }}>
                   <FormControl fullWidth>
                     <InputLabel>Subject</InputLabel>
                     <Select
@@ -840,7 +840,7 @@ function Assessments() {
                   </FormControl>
                 </Grid>
 
-                <Grid item xs={12} md={6}>
+                <Grid size={{ xs: 12, md: 6 }}>
                   <FormControl fullWidth>
                     <InputLabel>Assessment Type</InputLabel>
                     <Select
@@ -858,7 +858,7 @@ function Assessments() {
                   </FormControl>
                 </Grid>
 
-                <Grid item xs={12} md={6}>
+                <Grid size={{ xs: 12, md: 6 }}>
                   <FormControl fullWidth>
                     <InputLabel>Term</InputLabel>
                     <Select
@@ -875,7 +875,7 @@ function Assessments() {
                   </FormControl>
                 </Grid>
 
-                <Grid item xs={12} md={8}>
+                <Grid size={{ xs: 12, md: 8 }}>
                   <TextField
                     label="Assessment Title"
                     value={formData.title}
@@ -885,7 +885,7 @@ function Assessments() {
                   />
                 </Grid>
 
-                <Grid item xs={12} md={4}>
+                <Grid size={{ xs: 12, md: 4 }}>
                   <TextField
                     label="Max Score"
                     type="number"

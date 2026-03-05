@@ -102,7 +102,7 @@ function MyClasses() {
 
             <Grid container spacing={3}>
               {classes.map((classItem) => (
-                <Grid item xs={12} md={6} lg={4} key={classItem.id}>
+                <Grid size={{ xs: 12, md: 6, lg: 4 }} key={classItem.id}>
                   <Card
                     elevation={3}
                     sx={{
